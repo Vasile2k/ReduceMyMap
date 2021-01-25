@@ -46,4 +46,4 @@ constexpr int MASTER_ID = 0;
  * Separator for data in messages
  * Somethin' that can't be in filename or path
  */
-constexpr char MESSAGE_SEPARATOR = '(';
+constexpr char MESSAGE_SEPARATOR = 255;
