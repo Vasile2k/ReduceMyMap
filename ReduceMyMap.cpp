@@ -21,7 +21,7 @@ int main(int argc, char* argv[]) {
 
 	// Nice to run with 9 processes: 1 master and 8 slaves
 	if (rank == MASTER_ID) {
-		Master master(argc, argv);
+		Master master(argc, argv, size - 1);
 		master.run();
 	} else {
 		Servant servant(rank);
