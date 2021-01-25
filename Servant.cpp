@@ -32,8 +32,9 @@ void Servant::run() {
 				break;
 			}
 			case PACKET_REDUCE_TO_LETTER: {
-				const char* filename = nextJob.c_str() + 1;
-				std::cout << "Worker " << workerId << " reduces file " << filename << std::endl;
+				const char* letterAddr = nextJob.c_str() + 1;
+				char letter = *letterAddr;
+				std::cout << "Worker " << workerId << " reduces file with letter " << letter << std::endl;
 				break;
 			}
 		}
