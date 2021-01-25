@@ -106,9 +106,6 @@ void Servant::mapFileToWords(std::string filename, std::string inputDirectory, s
 
 	nlohmann::json j;
 
-
-	//j[filename];
-
 	for (auto& wordCount : freqs) {
 		j[filename][wordCount.first] = wordCount.second;
 	}
