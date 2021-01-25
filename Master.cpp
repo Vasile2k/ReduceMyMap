@@ -2,6 +2,8 @@
 #include <iostream>
 #include <string>
 #include <filesystem>
+#include <queue>
+#include "mpi.h"
 #include "Common.hpp"
 
 Master::Master(int argc, char* argv[], int workerCount) : availableWorkers(), workerCount(workerCount) {
@@ -45,7 +47,68 @@ Master::~Master() {
 }
 
 void Master::run() {
+	bool alive = true;
+	while (alive) {
+		
+		char data[256];
 
+		MPI_Status status;
+		MPI_Recv(data, 256, MPI_CHAR, MPI_ANY_SOURCE, MPI_ANY_TAG, MPI_COMM_WORLD, &status);
+
+		if (data[0] == PACKET_WORKER_FREE) {
+			availableWorkers.push(status.MPI_SOURCE);
+			std::cout << "Master: worker " << status.MPI_SOURCE << " free." << std::endl;
+		} else {
+			std::cout << "Master received unknown packet! Fuck!" << std::endl;
+		}
+		
+		if (remainingTasks.size() == 0 && availableWorkers.size() == workerCount) {
+			// Kill all and end life
+			
+			std::string killPacket = "";
+			killPacket += PACKET_SUICIDE;
+
+			while (!availableWorkers.empty()) {
+				int worker = availableWorkers.front();
+				sendJob(killPacket, worker);
+				availableWorkers.pop();
+			}
+			alive = false;
+		} else {
+			if (remainingTasks.size() == 0) {
+				// No more tasks, wait for all to finish
+				continue;
+			}
+			std::string& nextTask = remainingTasks.front();
+
+			if (nextTask[0] == PACKET_BARRIER) {
+				// Wait for all workers to finish
+
+				if (availableWorkers.size() == workerCount) {
+					// Barrier waiting done, now next task
+					remainingTasks.pop();
+					nextTask = remainingTasks.front();
+					std::cout << "Master finished waiting at barrier!" << std::endl;
+				} else {
+					// Otherwise do nothing until all of them are free
+					continue;
+				}
+			}
+			
+			if (availableWorkers.size() == 0) {
+				// No workers available? Well...
+				std::cout << "Master: Some kind of shit happened! No workers?" << std::endl;
+				continue;
+			}
+
+			int nextFreeWorker = availableWorkers.front();
+			sendJob(nextTask, nextFreeWorker);
+			std::cout << "Master: Sent job to " << nextFreeWorker << std::endl;
+			availableWorkers.pop();
+			remainingTasks.pop();
+		}
+	}
+	std::cout << "Master committed suicide! Ded!" << std::endl;
 }
 
 void Master::initTasks() {
@@ -56,25 +119,31 @@ void Master::initTasks() {
 		std::string task;
 		task += PACKET_MAP_TO_WORDS;
 		task += entry.path().filename().u8string();
-		remainingTasks.push_back(task);
+		remainingTasks.push(task);
 	}
 
 	// Wait for all of them to finish
 	std::string barrier = "";
 	barrier += PACKET_BARRIER;
-	remainingTasks.push_back(barrier);
+	remainingTasks.push(barrier);
 
 	// Letters to reduce to
 	for (char letter = 'a'; letter <= 'z'; ++letter) {
 		std::string task;
 		task += PACKET_REDUCE_TO_LETTER;
 		task += letter;
-		remainingTasks.push_back(task);
+		remainingTasks.push(task);
 	}
 
 	// List all tasks
-	std::cout << "Loaded tasks:" << std::endl;
-	for (const auto& task : remainingTasks) {
-		std::cout << task << std::endl;
-	}
+	// Or not, 'cause you're not supposed to see what's in the queue
+	//std::cout << "Loaded tasks:" << std::endl;
+	//for (const auto& task : remainingTasks) {
+	//	std::cout << task << std::endl;
+	//}
+}
+
+void Master::sendJob(std::string job, int worker) {
+	// Do not forget null termination
+	MPI_Send(job.c_str(), job.size() + 1, MPI_CHAR, worker, 0, MPI_COMM_WORLD);
 }
