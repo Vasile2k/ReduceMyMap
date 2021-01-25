@@ -41,3 +41,9 @@ constexpr int MASTER_ID = 0;
  * This packet is kept into the master and it knows it has to wait after all servants
  */
 #define PACKET_BARRIER ((char)0x77)
+
+/*
+ * Separator for data in messages
+ * Somethin' that can't be in filename or path
+ */
+constexpr char MESSAGE_SEPARATOR = '(';

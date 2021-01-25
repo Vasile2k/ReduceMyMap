@@ -6,7 +6,7 @@
 #include "mpi.h"
 #include "Common.hpp"
 
-Master::Master(int argc, char* argv[], int workerCount) : availableWorkers(), workerCount(workerCount) {
+Master::Master(int argc, char* argv[], int workerCount) : availableWorkers(), workerCount(workerCount), temporaryDirectory("./temp-dir/") {
 	
 	bool inputPathSet = false;
 	bool outputPathSet = false;
@@ -20,6 +20,14 @@ Master::Master(int argc, char* argv[], int workerCount) : availableWorkers(), wo
 			outputDirectory = argv[i+1];
 			outputPathSet = true;
 		}
+	}
+
+	// Make sure paths end with slash for easier concatenation with filename
+	if (!inputDirectory.back() != '/') {
+		inputDirectory += '/';
+	}
+	if (!outputDirectory.back() != '/') {
+		outputDirectory += '/';
 	}
 
 	if (inputPathSet) {
@@ -119,6 +127,10 @@ void Master::initTasks() {
 		std::string task;
 		task += PACKET_MAP_TO_WORDS;
 		task += entry.path().filename().u8string();
+		task += MESSAGE_SEPARATOR;
+		task += inputDirectory;
+		task += MESSAGE_SEPARATOR;
+		task += temporaryDirectory;
 		remainingTasks.push(task);
 	}
 
@@ -132,6 +144,10 @@ void Master::initTasks() {
 		std::string task;
 		task += PACKET_REDUCE_TO_LETTER;
 		task += letter;
+		task += MESSAGE_SEPARATOR;
+		task += temporaryDirectory;
+		task += MESSAGE_SEPARATOR;
+		task += outputDirectory;
 		remainingTasks.push(task);
 	}
 

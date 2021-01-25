@@ -1,6 +1,11 @@
 #include "Servant.hpp"
 #include <iostream>
 #include <string>
+#include <algorithm>
+#include <unordered_map>
+#include <nlohmann/json.hpp>
+#include <fstream>
+#include <cassert>
 #include "mpi.h"
 #include "Common.hpp"
 
@@ -27,14 +32,29 @@ void Servant::run() {
 				break;
 			}
 			case PACKET_MAP_TO_WORDS: {
-				const char* filename = nextJob.c_str() + 1;
-				std::cout << "Worker " << workerId << " maps file " << filename << std::endl;
+				const char* messageData = nextJob.c_str() + 1;
+				auto splitt = split(messageData);
+				assert(splitt.size() == 3, "Map: Message somehow got fucked up!");
+
+				auto filename = splitt[0];
+				auto inputDirectory = splitt[1];
+				auto outputDirectory = splitt[2];
+
+				std::cout << "Worker " << workerId << " maps file " << filename << " from " << inputDirectory << " to " << outputDirectory << std::endl;
+				mapFileToWords(filename, inputDirectory, outputDirectory);
 				break;
 			}
 			case PACKET_REDUCE_TO_LETTER: {
-				const char* letterAddr = nextJob.c_str() + 1;
-				char letter = *letterAddr;
-				std::cout << "Worker " << workerId << " reduces file with letter " << letter << std::endl;
+				const char* messageData = nextJob.c_str() + 1;
+				auto splitt = split(messageData);
+				assert(splitt.size() == 3, "Reduce: Message somehow got fucked up!");
+
+				auto letter = splitt[0][0];
+				auto inputDirectory = splitt[1];
+				auto outputDirectory = splitt[2];
+
+				std::cout << "Worker " << workerId << " reduces file with letter " << letter << " from " << inputDirectory << " to " << outputDirectory << std::endl;
+				reduceLetter(letter, inputDirectory, outputDirectory);
 				break;
 			}
 		}
@@ -54,4 +74,74 @@ std::string Servant::getNextTask() {
 	// Fail-safe
 	message[255] = 0;
 	return std::string(message);
+}
+
+void Servant::mapFileToWords(std::string filename, std::string inputDirectory, std::string outputDirectory) {
+	std::ifstream inFile(inputDirectory + filename);
+
+	std::unordered_map<std::string, int> freqs;
+
+	std::string line;
+	if (inFile.is_open()) {
+
+		while (std::getline(inFile, line)) {
+			// Remove carriage return and new-lines from line
+			std::replace(line.begin(), line.end(), '\r', ' ');
+			std::replace(line.begin(), line.end(), '\n', ' ');
+
+			auto words = split(line, " ");
+
+			for (auto word: words) {
+				freqs[word]++;
+			}
+		}
+
+		inFile.close();
+
+	} else {
+		assert(false, "3 cars of police stolen the file from your disk!");
+	}
+
+	std::ofstream outFile(outputDirectory + filename + ".json");
+
+	nlohmann::json j;
+
+
+	//j[filename];
+
+	for (auto& wordCount : freqs) {
+		j[filename][wordCount.first] = wordCount.second;
+	}
+
+	if (outFile.is_open()) {
+		std::string data = j.dump(4);
+		outFile << data;
+		outFile.close();
+	} else {
+		assert(false, "3 cars of police won't let me create the file on your disk!");
+	}
+}
+
+void Servant::reduceLetter(char letter, std::string inputDirectory, std::string outputDirectory) {
+
+}
+
+std::vector<std::string> split(const std::string& str, const std::string& delim) {
+	std::vector<std::string> tokens;
+	size_t prev = 0;
+	size_t pos = 0;
+
+	do {
+		pos = str.find(delim, prev);
+		if (pos == std::string::npos) {
+			pos = str.length();
+		}
+		std::string token = str.substr(prev, pos-prev);
+		if (!token.empty()) {
+			tokens.push_back(token);
+		}
+		prev = pos + delim.length();
+	} while (pos < str.length() && prev < str.length());
+
+	return tokens;
 }

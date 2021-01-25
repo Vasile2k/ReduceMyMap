@@ -19,4 +19,5 @@ private:
 	std::queue<std::string> remainingTasks;
 	std::string inputDirectory;
 	std::string outputDirectory;
+	std::string temporaryDirectory;
 };
