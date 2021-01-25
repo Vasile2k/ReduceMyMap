@@ -3,6 +3,7 @@
 #include <cassert>
 #include <algorithm>
 #include "mpi.h"
+#include "Common.hpp"
 #include "Master.hpp"
 #include "Servant.hpp"
 
@@ -19,9 +20,7 @@ int main(int argc, char* argv[]) {
 	MPI_Comm_rank(MPI_COMM_WORLD, &rank);
 
 	// Nice to run with 9 processes: 1 master and 8 slaves
-	// Rank 0 is always master
-	// Other ranks are ordinary servants
-	if (rank == 0) {
+	if (rank == MASTER_ID) {
 		Master master(argc, argv);
 		master.run();
 	} else {
