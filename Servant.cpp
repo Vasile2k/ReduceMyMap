@@ -121,7 +121,34 @@ void Servant::mapFileToWords(std::string filename, std::string inputDirectory, s
 }
 
 void Servant::reduceLetter(char letter, std::string inputDirectory, std::string outputDirectory) {
+	nlohmann::json j;
 
+	for (const auto& entry : std::filesystem::directory_iterator(inputDirectory)) {
+		std::string filename = entry.path().filename().u8string();
+
+		std::ifstream inFile(inputDirectory + filename);
+		std::string content((std::istreambuf_iterator<char>(inFile)), (std::istreambuf_iterator<char>()));
+		inFile.close();
+
+		nlohmann::json mapped = nlohmann::json::parse(content);
+
+		for (auto& [document, counts] : mapped.items()) {
+			for (auto& [word, count] : counts.items()) {
+				if (word[0] == letter) {
+					j[word][document] = count;
+				}
+			}
+		}
+	}
+
+	std::ofstream outFile(outputDirectory + letter + ".json");
+	if (outFile.is_open()) {
+		std::string data = j.dump(4);
+		outFile << data;
+		outFile.close();
+	} else {
+		assert(false, "3 cars of police won't let me create the file on your disk!");
+	}
 }
 
 std::vector<std::string> split(const std::string& str, const std::string& delim) {
