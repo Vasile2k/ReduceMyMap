@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 class Servant {
 public:
 
@@ -7,6 +9,8 @@ public:
 	~Servant();
 
 	void run();
+	void notifyMaster();
+	std::string getNextTask();
 private:
 
 	int workerId;
