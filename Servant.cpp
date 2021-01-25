@@ -131,6 +131,8 @@ void Servant::mapFileToWords(std::string filename, std::string inputDirectory, s
 void Servant::reduceLetter(char letter, std::string inputDirectory, std::string outputDirectory) {
 	nlohmann::json j;
 
+	char letterUppercase = letter + ('A' - 'a');
+
 	for (const auto& entry : std::filesystem::directory_iterator(inputDirectory)) {
 		std::string filename = entry.path().filename().u8string();
 
@@ -142,7 +144,7 @@ void Servant::reduceLetter(char letter, std::string inputDirectory, std::string 
 
 		for (auto& [document, counts] : mapped.items()) {
 			for (auto& [word, count] : counts.items()) {
-				if (word[0] == letter) {
+				if (word[0] == letter || word[0] == letterUppercase) {
 					j[word][document] = count;
 				}
 			}
