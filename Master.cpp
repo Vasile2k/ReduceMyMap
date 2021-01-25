@@ -1,9 +1,9 @@
-#include "Master.hpp"
+#include <filesystem>
 #include <iostream>
 #include <string>
-#include <filesystem>
 #include <queue>
-#include "mpi.h"
+#include <mpi.h>
+#include "Master.hpp"
 #include "Common.hpp"
 
 Master::Master(int argc, char* argv[], int workerCount) : availableWorkers(), workerCount(workerCount), temporaryDirectory("./temp-dir/") {

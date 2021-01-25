@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
-#include <queue>
 #include <string>
+#include <queue>
 
 class Master {
 public:

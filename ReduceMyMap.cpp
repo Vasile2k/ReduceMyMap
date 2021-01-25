@@ -1,11 +1,11 @@
-﻿#include <iostream>
-#include <vector>
+﻿#include <algorithm>
+#include <iostream>
 #include <cassert>
-#include <algorithm>
-#include "mpi.h"
-#include "Common.hpp"
-#include "Master.hpp"
+#include <vector>
+#include <mpi.h>
 #include "Servant.hpp"
+#include "Master.hpp"
+#include "Common.hpp"
 
 /*
  * Parameters are -i for input path and -o for output path
