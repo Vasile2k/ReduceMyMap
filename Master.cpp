@@ -95,8 +95,14 @@ void Master::run() {
 				if (availableWorkers.size() == workerCount) {
 					// Barrier waiting done, now next task
 					remainingTasks.pop();
-					nextTask = remainingTasks.front();
+					while (remainingTasks.size() > 0 && availableWorkers.size() > 0) {
+						nextTask = remainingTasks.front();
+						sendJob(nextTask, availableWorkers.front());
+						availableWorkers.pop();
+						remainingTasks.pop();
+					}
 					std::cout << "Master finished waiting at barrier!" << std::endl;
+					continue;
 				} else {
 					// Otherwise do nothing until all of them are free
 					continue;
