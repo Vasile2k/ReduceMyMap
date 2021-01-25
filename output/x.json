@@ -1,0 +1,365 @@
+{
+    "X": {
+        "1.txt": 1,
+        "15.txt": 3,
+        "16.txt": 1,
+        "18.txt": 1,
+        "21.txt": 1,
+        "8.txt": 1
+    },
+    "X,": {
+        "25.txt": 1,
+        "3.txt": 1
+    },
+    "X--THE": {
+        "11.txt": 1
+    },
+    "X-ray": {
+        "12.txt": 1,
+        "15.txt": 1
+    },
+    "X-rayed": {
+        "3.txt": 2
+    },
+    "X-rays": {
+        "3.txt": 2
+    },
+    "X-rays,": {
+        "3.txt": 1
+    },
+    "X.": {
+        "15.txt": 2,
+        "16.txt": 13
+    },
+    "XCHANGE": {
+        "3.txt": 1
+    },
+    "XCVIII.": {
+        "6.txt": 1
+    },
+    "XENOCRATES": {
+        "16.txt": 1
+    },
+    "XI": {
+        "16.txt": 1,
+        "8.txt": 1
+    },
+    "XI--MESMER'S": {
+        "11.txt": 1
+    },
+    "XI.": {
+        "16.txt": 13
+    },
+    "XII": {
+        "16.txt": 1,
+        "8.txt": 1
+    },
+    "XII--THE": {
+        "11.txt": 1
+    },
+    "XII.": {
+        "16.txt": 13
+    },
+    "XIII": {
+        "16.txt": 2,
+        "8.txt": 1
+    },
+    "XIII--OOLANGA'S": {
+        "11.txt": 1
+    },
+    "XIII.": {
+        "16.txt": 13
+    },
+    "XIV": {
+        "16.txt": 1,
+        "8.txt": 1
+    },
+    "XIV--BATTLE": {
+        "11.txt": 1
+    },
+    "XIV.": {
+        "16.txt": 14
+    },
+    "XIX": {
+        "8.txt": 1
+    },
+    "XIX--AN": {
+        "11.txt": 1
+    },
+    "XIX.": {
+        "16.txt": 9
+    },
+    "XL": {
+        "8.txt": 1
+    },
+    "XL.": {
+        "16.txt": 6
+    },
+    "XLI": {
+        "8.txt": 1
+    },
+    "XLI.": {
+        "16.txt": 5
+    },
+    "XLII": {
+        "8.txt": 1
+    },
+    "XLII.": {
+        "16.txt": 6
+    },
+    "XLIII": {
+        "8.txt": 1
+    },
+    "XLIII.": {
+        "16.txt": 5
+    },
+    "XLIV.": {
+        "16.txt": 3
+    },
+    "XLIX.": {
+        "16.txt": 2
+    },
+    "XLV.": {
+        "16.txt": 2
+    },
+    "XLVI.": {
+        "16.txt": 2
+    },
+    "XLVII.": {
+        "16.txt": 2
+    },
+    "XLVIII.": {
+        "16.txt": 2
+    },
+    "XV": {
+        "8.txt": 1
+    },
+    "XV--ON": {
+        "11.txt": 1
+    },
+    "XV.": {
+        "16.txt": 14
+    },
+    "XVI": {
+        "8.txt": 1
+    },
+    "XVI--A": {
+        "11.txt": 1
+    },
+    "XVI.": {
+        "16.txt": 11
+    },
+    "XVII": {
+        "8.txt": 1
+    },
+    "XVII--THE": {
+        "11.txt": 1
+    },
+    "XVII.": {
+        "16.txt": 12
+    },
+    "XVIII": {
+        "8.txt": 1
+    },
+    "XVIII--EXIT": {
+        "11.txt": 1
+    },
+    "XVIII.": {
+        "16.txt": 9
+    },
+    "XVL": {
+        "16.txt": 1
+    },
+    "XX": {
+        "8.txt": 1
+    },
+    "XX--METABOLISM": {
+        "11.txt": 1
+    },
+    "XX.": {
+        "16.txt": 9
+    },
+    "XXI": {
+        "8.txt": 2
+    },
+    "XXI--GREEN": {
+        "11.txt": 1
+    },
+    "XXI.": {
+        "16.txt": 9
+    },
+    "XXII--AT": {
+        "11.txt": 1
+    },
+    "XXII.": {
+        "16.txt": 11
+    },
+    "XXII.The": {
+        "16.txt": 1
+    },
+    "XXIII": {
+        "16.txt": 1,
+        "8.txt": 1
+    },
+    "XXIII--IN": {
+        "11.txt": 1
+    },
+    "XXIII.": {
+        "16.txt": 10
+    },
+    "XXIV": {
+        "16.txt": 1,
+        "8.txt": 1
+    },
+    "XXIV--A": {
+        "11.txt": 1
+    },
+    "XXIV.": {
+        "16.txt": 9
+    },
+    "XXIX": {
+        "16.txt": 1
+    },
+    "XXIX.": {
+        "16.txt": 8
+    },
+    "XXV": {
+        "8.txt": 1
+    },
+    "XXV,": {
+        "15.txt": 1
+    },
+    "XXV--THE": {
+        "11.txt": 1
+    },
+    "XXV.": {
+        "16.txt": 12
+    },
+    "XXVI": {
+        "8.txt": 1
+    },
+    "XXVI--FACE": {
+        "11.txt": 1
+    },
+    "XXVI.": {
+        "16.txt": 10
+    },
+    "XXVII": {
+        "8.txt": 1
+    },
+    "XXVII--ON": {
+        "11.txt": 1
+    },
+    "XXVII.": {
+        "16.txt": 12
+    },
+    "XXVIII": {
+        "8.txt": 1
+    },
+    "XXVIII--THE": {
+        "11.txt": 1
+    },
+    "XXVIII.": {
+        "16.txt": 9
+    },
+    "XXX.": {
+        "16.txt": 10
+    },
+    "XXXI": {
+        "8.txt": 1
+    },
+    "XXXI.": {
+        "16.txt": 7
+    },
+    "XXXII": {
+        "8.txt": 1
+    },
+    "XXXII.": {
+        "16.txt": 7
+    },
+    "XXXIII": {
+        "8.txt": 1
+    },
+    "XXXIII.": {
+        "16.txt": 7
+    },
+    "XXXIV": {
+        "16.txt": 1,
+        "8.txt": 1
+    },
+    "XXXIV.": {
+        "16.txt": 7
+    },
+    "XXXIX": {
+        "8.txt": 1
+    },
+    "XXXIX.": {
+        "16.txt": 6
+    },
+    "XXXV": {
+        "8.txt": 1
+    },
+    "XXXV.": {
+        "16.txt": 6
+    },
+    "XXXVI": {
+        "8.txt": 1
+    },
+    "XXXVI.": {
+        "16.txt": 6
+    },
+    "XXXVII": {
+        "8.txt": 1
+    },
+    "XXXVII.": {
+        "16.txt": 9
+    },
+    "XXXVIII": {
+        "8.txt": 1
+    },
+    "XXXVIII.": {
+        "16.txt": 7
+    },
+    "Xanthippe": {
+        "16.txt": 1
+    },
+    "Xenocrates": {
+        "16.txt": 1
+    },
+    "Xenophon,": {
+        "16.txt": 1
+    },
+    "Xerox": {
+        "3.txt": 1
+    },
+    "x": {
+        "10.txt": 1,
+        "16.txt": 1,
+        "25.txt": 1,
+        "3.txt": 3
+    },
+    "x,": {
+        "25.txt": 1
+    },
+    "x.": {
+        "16.txt": 1
+    },
+    "xerox": {
+        "3.txt": 1
+    },
+    "xiii": {
+        "25.txt": 1
+    },
+    "xiii.,": {
+        "21.txt": 1
+    },
+    "xiv.),": {
+        "16.txt": 1
+    },
+    "xlviii.": {
+        "16.txt": 1
+    },
+    "xx.": {
+        "16.txt": 1
+    }
+}
