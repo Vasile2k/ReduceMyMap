@@ -112,7 +112,15 @@ void Servant::mapFileToWords(std::string filename, std::string inputDirectory, s
 	}
 
 	if (outFile.is_open()) {
-		std::string data = j.dump(4);
+		std::string data;
+		try {
+			data = j.dump(4);
+		} catch (nlohmann::json::exception ex) {
+			// LOST A FUCKING HOUR UNTIL I FOUND THIS BULLSHIT.
+			// FUCK NON UTF-8 ENCODED INPUT FILES
+			// FUCK MY LIFE :|
+			std::cout << ex.what() << std::endl;
+		}
 		outFile << data;
 		outFile.close();
 	} else {
