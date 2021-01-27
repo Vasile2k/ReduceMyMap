@@ -19,6 +19,33 @@ A temporary directory will also be created, but you should live with the idea th
 
 The program will loop through all files in the directory, read them and apply the mapping to each one.
 
+## Description
+
+Pseudocode for whatever the fuck happens here:
+
+##### Master:
+```c
+initTaskList();
+while not done:
+	checkForAvailableSlaves();
+	if nextTask is barrier:
+		waitForAllSlavesToFinish();
+	sendJobsToSlaves();
+killAllSlaves();
+```
+##### Servant:
+```c
+while not done:
+	tellMasterImNotBusy();
+	getNextJob();
+	if nextJob is map:
+		map(document);
+	if nextJob is reduce:
+		reduce(letter);
+	if nextJob is finish:
+		die();
+```
+
 ## License
 
  * This thing is distributed under Apache 2.0. See [LICENSE](LICENSE).
